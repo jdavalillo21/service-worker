@@ -7,12 +7,11 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/index.html",
           "/favicon.ico",
-          "/vistas/error/**"
-        ],
-        "urls": [
-          "https://fonts.googleapis.com/**"
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
         ]
       }
     },
@@ -23,29 +22,25 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
       }
-    }
-  ],
-  "dataGroups": [
+    },
     {
-      "name": "api",
-      "urls": [
-        "/api/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "3d",
-        "strategy": "freshness"
-      }
-    }
-  ],
-  "navigationUrls": [
-    {
-      "positive": true,
-      "regex": "^\\/(?!__|ngsw|error).*",
-      "failure": "/error"
+      "name": "error-component",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/vistas/error/**"
+        ]
+      },
+      "navigationUrls": [
+        {
+          "positive": true,
+          "regex": "^/error"
+        }
+      ]
     }
   ]
 }
