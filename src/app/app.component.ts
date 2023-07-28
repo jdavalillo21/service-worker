@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'my-angular-app';
+  isOnline: boolean = navigator.onLine;
 
   constructor(
     private router: Router
@@ -15,5 +16,10 @@ export class AppComponent {
     if(!window.navigator.onLine){
       this.router.navigate(['/error']);
     }
+  }
+  @HostListener('window:offline', ['$event'])
+  onOffline(event: Event) {
+    this.isOnline = false;
+    this.router.navigate(['/error']);
   }
 }
