@@ -1,7 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +11,7 @@ export class AppComponent {
   isOnline: boolean = navigator.onLine;
 
   constructor(
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ){
     if(!window.navigator.onLine){
       this.router.navigate(['/error']);
