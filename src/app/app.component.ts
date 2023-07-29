@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { tap, catchError } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'my-angular-app';
   isOnline: boolean = navigator.onLine;
 
@@ -19,25 +19,6 @@ export class AppComponent implements OnInit {
     if(!window.navigator.onLine){
       this.router.navigate(['/error']);
     }
-  }
-
-  ngOnInit(){
-    this.getDataFromServer();
-  }
-
-  getDataFromServer() {
-    const url = this.router.url;
-    this.http.get(url)
-      .pipe(
-        tap((data: any) => {
-          console.log('conectado', data);
-        }),
-        catchError((error: any) => {
-          this.router.navigate(['/error']);
-          return [];
-        })
-      )
-      .subscribe();
   }
 
 
